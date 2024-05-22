@@ -98,3 +98,17 @@ export const lettersMapping: { [key: string]: string } = {
   "-": "औ",
   _: "ओ",
 };
+
+
+export const specialLetterKeyword: string[] = [
+  "f",
+  "F",
+  "l",
+  "L",
+  "'",
+  '"',
+  "\\",
+  "{",
+  "]",
+  "}"
+]

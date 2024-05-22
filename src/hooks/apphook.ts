@@ -1,7 +1,6 @@
 import { lettersMapping } from "@/data/mapping";
-import { convertEnglishToNepali } from "@/libs/conversion";
 import { useStateStore } from "@/libs/state";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 
 type ReturnType = {
     englishWords:string;

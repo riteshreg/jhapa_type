@@ -4,16 +4,22 @@ export function convertEnglishToNepali(
   englishText: string,
   nepaliText: string,
 ) {
+
   // splitting englishText into a array of string;
   const EnglishWordArray = englishText.split(" ");
 
   // splitting all the nepaliText
   const NepaliWordArray = nepaliText.split(" ");
 
+
+  const currentWord = EnglishWordArray[EnglishWordArray.length - 1]
+
   // this is the last english word which we have to convert to nepali;
-  const nepaliword = EnglishWordArray[EnglishWordArray.length - 1]
+  const nepaliword = currentWord
     .split("")
-    .map((letter) => lettersMapping[letter])
+    .map((letter) => {
+      return lettersMapping[letter]
+    })
     .join("");
 
   if (EnglishWordArray.length === NepaliWordArray.length) {

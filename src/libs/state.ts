@@ -1,6 +1,5 @@
-import { create } from 'zustand'
-import { immer } from 'zustand/middleware/immer'
-import { convertEnglishToNepali } from './conversion';
+import { create } from 'zustand';
+import { immer } from 'zustand/middleware/immer';
 import { setEnglishWord } from './setEnglishWords';
 
 export type State = {
@@ -20,8 +19,7 @@ const initialState: State = {
 
 export const useStateStore = create<State & Actions>()(
     immer((set) => ({
-        ...initialState,
-        
+        ...initialState,        
         setEnglishWords: (params) => setEnglishWord({set, args:params})
 
     })),
