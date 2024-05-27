@@ -22,7 +22,7 @@ export const lettersMapping: { [key: string]: string } = {
   ":": "ट्ठ",
   "'": "ु",
   '"': "ू",
-  "\\": "्",
+  "☮": "्",
 
   // bottom row
   z: "श",
@@ -72,6 +72,8 @@ export const lettersMapping: { [key: string]: string } = {
   "]": "े",
   "}": "ै",
 
+  
+
   // number row
   "`": "",
   "~": "",
@@ -99,7 +101,6 @@ export const lettersMapping: { [key: string]: string } = {
   _: "ओ",
 };
 
-
 export const specialLetterKeyword: string[] = [
   "f",
   "F",
@@ -107,8 +108,9 @@ export const specialLetterKeyword: string[] = [
   "L",
   "'",
   '"',
-  "\\",
+  '☮',
   "{",
   "]",
-  "}"
-]
+  "}",
+  "J"
+];
