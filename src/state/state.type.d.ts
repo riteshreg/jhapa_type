@@ -1,35 +1,39 @@
 type SetEnglishWordsParams =
   | {
-    type: "typing";
-    letter: string;
-  }
+      type: "typing";
+      letter: string;
+    }
   | {
-    type: "backspace";
-  };
+      type: "backspace";
+    };
 
 type User = {
   email: string;
   username: string;
 };
 
-type CharType = "correct" | "incorrect" | "extra"  | "none" | "space"
+type CharType = "correct" | "incorrect" | "extra" | "none" | "space";
 
 type Char = {
-  english:string
-  nepali:string;
-  numberOfKeyStroke:number;
+  english: string;
+  nepali: string;
+  numberOfKeyStroke: number;
   type: CharType;
-  typedKeywords:string[]
-}
-
+  typedKeywords: string[];
+  inViewPort: boolean;
+};
 
 type Word = {
-  isIncorrect:boolean;
-  chars:Array<Char>
-}
-
+  isIncorrect: boolean;
+  chars: Array<Char>;
+};
 
 type Letter = {
-  letter:string,
-  type:"normal" | "space"
-}
+  letter: string;
+  type: "normal" | "space";
+};
+
+type CanvasTextVal = {
+  x: number;
+  y: number;
+};

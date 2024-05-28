@@ -72,8 +72,6 @@ export const lettersMapping: { [key: string]: string } = {
   "]": "े",
   "}": "ै",
 
-  
-
   // number row
   "`": "",
   "~": "",
@@ -108,9 +106,9 @@ export const specialLetterKeyword: string[] = [
   "L",
   "'",
   '"',
-  '☮',
+  "☮",
   "{",
   "]",
   "}",
-  "J"
+  "J",
 ];

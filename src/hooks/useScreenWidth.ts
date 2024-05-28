@@ -1,25 +1,25 @@
 import { useEffect, useState } from "react";
 
 type ReturnType = {
-    widht: number;
-}
+  widht: number;
+};
 
 export const useScreenWidth = (): ReturnType => {
-    const [widht, setWidth] = useState<number>(window.innerWidth);
+  const [widht, setWidth] = useState<number>(window.innerWidth);
 
-    useEffect(() => {
-        window.addEventListener("resize", handleResize);
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
 
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
-    function handleResize() {
-        setWidth(window.innerWidth);
-    }
+  function handleResize() {
+    setWidth(window.innerWidth);
+  }
 
-    return {
-        widht
-    }
+  return {
+    widht,
+  };
 };

@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { useStateStore } from "../state/state";
 import Login from "@/components/Login";
-import { getUserFromLocalStorage, setUserInLocalStorage } from "../state/actions/SetUser";
+import {
+  getUserFromLocalStorage,
+  setUserInLocalStorage,
+} from "../state/actions/SetUser";
 
 export const Provider = ({ children }: { children: React.ReactNode }) => {
   const { user, setUser } = useStateStore((state) => state);

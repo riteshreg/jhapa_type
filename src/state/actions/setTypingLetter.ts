@@ -1,43 +1,115 @@
 import { lettersMapping } from "@/data/mapping";
 import { State } from "../state";
-
+import { ChangeWordsViewPort } from "@/lib/ChangeWordsViewPort";
 
 type Params = {
   set: (nextStarterUpdate: (state: State) => void) => void;
   typedLetter: Letter;
 };
 
+// export function setTypingLetter({ set, typedLetter }: Params) {
+//   set((state) => {
+//     const { letter, type } = typedLetter;
+
+//     // getting the required varialble from state
+//     let { wordIndex, charIndex, words } = state;
+
+//     let currentWord = words[wordIndex];
+//     if (!currentWord) return;
+//     let currentLetter = currentWord.chars[charIndex];
+//     if (!currentLetter) return;
+
+//     // adding typed letter in to the typedKeywords array
+//     currentLetter.typedKeywords.push(letter);
+
+//     // we are gonna check if the currentLetter is equal to letter or not
+//     // as we know there can be multiple letter in currentLetter
+//     if (
+//       currentLetter.english.split("")[
+//         currentLetter.typedKeywords.length - 1
+//       ] !== letter
+//     ) {
+//       // we are removing last item of typeKeywords so that we can again
+//       state.words[wordIndex].chars[charIndex].typedKeywords.pop();
+//       state.mistypeLetter.push(lettersMapping[letter]);
+
+//       // mis_type_letter is the english we inserted incase we get any mis_type letter;
+//       let mis_type_letter = letter;
+
+//       // in case of mis_type of space keyword we need to add _
+//       if (type === "space") {
+//         mis_type_letter = "_";
+//       }
+
+//       currentWord.chars.splice(charIndex, 0, {
+//         english: mis_type_letter,
+//         nepali: mis_type_letter,
+//         numberOfKeyStroke: 1,
+//         type: "incorrect",
+//         typedKeywords: [letter],
+//         inViewPort: true,
+//       });
+
+//       state.charIndex += 1;
+//       state.canvasTextVal.x += 1;
+//       state.words = ChangeWordsViewPort(state.words, state.canvasTextVal);
+
+//       // returning in this case;
+//       return;
+//     }
+
+//     // from here the letter user enter will be correct
+
+//     if (
+//       currentLetter.numberOfKeyStroke === currentLetter.typedKeywords.length
+//     ) {
+//       // now the we have entered the correct letter so checking its type to correct
+//       currentLetter.type = "correct";
+//       state.charIndex += 1;
+
+//       state.canvasTextVal.x += 1;
+//       state.canvasTextVal.y += 1;
+
+//       state.words = ChangeWordsViewPort(state.words, state.canvasTextVal);
+
+//       // updating the state if the word has completed;
+//       if (currentWord.chars.length === state.charIndex) {
+//         state.wordIndex += 1;
+//         state.charIndex = 0;
+//       }
+//     }
+//   });
+// }
+
 export function setTypingLetter({ set, typedLetter }: Params) {
   set((state) => {
+    const { letter, type } = typedLetter;
 
-    const { letter, type} = typedLetter
-
-    // getting the required varialble from state
+    // getting the required variables from state
     let { wordIndex, charIndex, words } = state;
 
     let currentWord = words[wordIndex];
+    if (!currentWord) return;
     let currentLetter = currentWord.chars[charIndex];
+    if (!currentLetter) return;
 
-    // adding typed letter in to the typedKeywords array
+    // adding typed letter into the typedKeywords array
     currentLetter.typedKeywords.push(letter);
 
-    // we are gonna check if the currentLetter is equal to letter or not
-    // as we know there can be multiple letter in currentLetter
+    // checking if the currentLetter is equal to the letter or not
     if (
       currentLetter.english.split("")[
-      currentLetter.typedKeywords.length - 1
+        currentLetter.typedKeywords.length - 1
       ] !== letter
     ) {
-      // we are removing last item of typeKeywords so that we can again 
-      state.words[wordIndex].chars[charIndex].typedKeywords.pop()
+      // remove last item of typedKeywords to allow retry
+      state.words[wordIndex].chars[charIndex].typedKeywords.pop();
       state.mistypeLetter.push(lettersMapping[letter]);
 
-      // mis_type_letter is the english we inserted incase we get any mis_type letter;
+      // handling mis_type_letter for space key
       let mis_type_letter = letter;
-
-      // in case of mis_type of space keyword we need to add _ 
-      if(type === 'space'){
-        mis_type_letter = "_"
+      if (type === "space") {
+        mis_type_letter = "_";
       }
 
       currentWord.chars.splice(charIndex, 0, {
@@ -45,29 +117,34 @@ export function setTypingLetter({ set, typedLetter }: Params) {
         nepali: mis_type_letter,
         numberOfKeyStroke: 1,
         type: "incorrect",
-        typedKeywords: [letter]
-      })
+        typedKeywords: [letter],
+        inViewPort: true,
+      });
 
-      state.charIndex += 1
-      // returning in this case;
+      state.words = ChangeWordsViewPort(state.words, state.canvasTextVal);
+      state.charIndex += 1;
+      state.canvasTextVal.x += 1;
+
       return;
     }
 
-    // from here the letter user enter will be correct   
-
+    // from here the letter user entered will be correct
     if (
       currentLetter.numberOfKeyStroke === currentLetter.typedKeywords.length
     ) {
+      currentLetter.type = "correct";
+      state.charIndex += 1;
 
-      // now the we have entered the correct letter so checking its type to correct
-      currentLetter.type = 'correct'
-      state.charIndex += 1
+      state.canvasTextVal.x += 1;
+      state.canvasTextVal.y += 1;
 
+      state.words = ChangeWordsViewPort(state.words, state.canvasTextVal);
+
+      // updating state if the word is complete
       if (currentWord.chars.length === state.charIndex) {
-        state.wordIndex += 1
+        state.wordIndex += 1;
         state.charIndex = 0;
       }
-
     }
   });
 }

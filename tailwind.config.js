@@ -18,13 +18,11 @@ module.exports = {
     },
     extend: {
       colors: {
+        activeLetterColor: "#393939",
+        correctWordColor: "#cbbfbd",
+        extraLetterColor: "#bd2a2c",
+        extraLetterBackgroundColor: "#edbbbc",
 
-
-        activeLetterColor:"#393939",
-        correctWordColor:"#cbbfbd",
-        extraLetterColor:"#bd2a2c",
-        extraLetterBackgroundColor:"#edbbbc",
-        
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

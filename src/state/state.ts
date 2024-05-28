@@ -8,25 +8,25 @@ import { setRawEnglish } from "./actions/setRawEnglish";
 export type State = {
   user: User | null;
 
-  rawEnglish:string | null
+  rawEnglish: string | null;
 
-  words:Word[]
+  words: Word[];
 
-  mistypeLetter:string[]
+  mistypeLetter: string[];
 
-  wordIndex:number
+  wordIndex: number;
 
-  charIndex:number;
+  charIndex: number;
 
-
+  canvasTextVal: CanvasTextVal;
 };
 
 export type Actions = {
   setUser: (user: User) => void;
 
-  setRawEnglish: (param: State['rawEnglish'] ) => void;
+  setRawEnglish: (param: State["rawEnglish"]) => void;
 
-  setTypingLetter: (letter:Letter) => void;
+  setTypingLetter: (letter: Letter) => void;
 
   logout: () => void;
 };
@@ -34,25 +34,29 @@ export type Actions = {
 const initialState: State = {
   user: null,
 
-  rawEnglish:null,
+  rawEnglish: null,
 
-  words:[],
+  words: [],
 
-  mistypeLetter:[],
+  mistypeLetter: [],
 
-  wordIndex:0,
+  wordIndex: 0,
 
-  charIndex:0,
+  charIndex: 0,
 
- 
+  canvasTextVal: {
+    x: 0,
+    y: 35,
+  },
 };
 
 export const useStateStore = create<State & Actions>()(
   immer((set) => ({
     ...initialState,
-    setTypingLetter: (typedLetter) => setTypingLetter({ set,typedLetter }),
+    setTypingLetter: (typedLetter) => setTypingLetter({ set, typedLetter }),
     setUser: (user: User) => setUser({ set, user }),
-    setRawEnglish:(rawEnglish:State['rawEnglish'])=> setRawEnglish({set, rawEnglish}),
+    setRawEnglish: (rawEnglish: State["rawEnglish"]) =>
+      setRawEnglish({ set, rawEnglish }),
     logout: () => logout({ set }),
   })),
 );

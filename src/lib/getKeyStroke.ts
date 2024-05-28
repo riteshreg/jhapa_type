@@ -1,14 +1,12 @@
 import { lettersMapping, specialLetterKeyword } from "@/data/mapping";
+import { ChangeWordsViewPort } from "./ChangeWordsViewPort";
 
 function z(paragraph: string): Word[] {
   const words = paragraph.split(/\s+/);
   const result: Word[] = [];
 
-  console.log("xxxxx", 1)
-
   for (let word of words) {
-
-    const letterResult: Char[] = []
+    const letterResult: Char[] = [];
 
     const letters = word.split("");
     let addingOtherKeyStroke = "";
@@ -22,30 +20,34 @@ function z(paragraph: string): Word[] {
       if (specialLetterKeyword.includes(currentLetter)) {
         // Start a sequence of special letters
         let sequence = {
-          np: lettersMapping[addingOtherKeyStroke] + lettersMapping[currentLetter],
+          np:
+            lettersMapping[addingOtherKeyStroke] +
+            lettersMapping[currentLetter],
           en: addingOtherKeyStroke + currentLetter,
         };
 
-        while (letters.length > 0 && specialLetterKeyword.includes(letters[0])) {
+        while (
+          letters.length > 0 &&
+          specialLetterKeyword.includes(letters[0])
+        ) {
           const shifted_letter = letters.shift();
           if (!shifted_letter) return [];
           sequence.en += shifted_letter;
-          sequence.np += lettersMapping[shifted_letter]
+          sequence.np += lettersMapping[shifted_letter];
         }
 
-
         // Determine if the next letter after the sequence is special or not
-        // const nextLetter = letters[0];    
+        // const nextLetter = letters[0];
         const charResult: Char = {
           typedKeywords: [],
           english: sequence.en,
           nepali: sequence.np,
           numberOfKeyStroke: sequence.en.length,
-          type: "none"
-        }
+          type: "none",
+          inViewPort: false,
+        };
 
         letterResult.push(charResult);
-
       } else {
         // Determine if the next letter is special or not
         const nextLetter = letters[0];
@@ -57,33 +59,35 @@ function z(paragraph: string): Word[] {
             english: currentLetter,
             nepali: lettersMapping[currentLetter],
             numberOfKeyStroke: 1,
-            type: "none"
-          }
-          letterResult.push(charResult)
+            type: "none",
+            inViewPort: false,
+          };
+          letterResult.push(charResult);
         }
       }
     }
 
     result.push({
       isIncorrect: false,
-      chars: letterResult
-    })
-
+      chars: letterResult,
+    });
 
     result.push({
       isIncorrect: false,
-      chars: [{
-        english: ' ',
-        nepali: ' ',
-        numberOfKeyStroke: 1,
-        type: "space",
-        typedKeywords: []
-      }]
-    })
+      chars: [
+        {
+          english: " ",
+          nepali: " ",
+          numberOfKeyStroke: 1,
+          type: "space",
+          inViewPort: false,
+          typedKeywords: [],
+        },
+      ],
+    });
   }
 
-  return result
-
+  return ChangeWordsViewPort(result);
 }
 
-export default z
+export default z;

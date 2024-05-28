@@ -5,7 +5,8 @@ import { useCallback, useEffect } from "react";
 type ReturnType = {
   words: Word[];
   setRawEnglish: (params: string | null) => void;
-  mistypeLetter: string[]
+  mistypeLetter: string[];
+  canvasTextVal: CanvasTextVal;
 };
 
 export default function useAppHook(): ReturnType {
@@ -14,7 +15,13 @@ export default function useAppHook(): ReturnType {
   the first thing happen in the hook is we store string of required keystroke to form a
   nepali word. this usually look like  this 'd]/J gfd /lt]z v*sf xJ d g]kfn df a;%' . g]kfn d]/' 
   */
-  const { words, setRawEnglish, setTypingLetter, mistypeLetter } = useStateStore((state) => state);
+  const {
+    words,
+    setRawEnglish,
+    setTypingLetter,
+    mistypeLetter,
+    canvasTextVal,
+  } = useStateStore((state) => state);
 
   // useCallback to memoize the event handler
   const typeHandler = useCallback((event: KeyboardEvent) => {
@@ -60,5 +67,6 @@ export default function useAppHook(): ReturnType {
     setRawEnglish,
     words,
     mistypeLetter,
+    canvasTextVal,
   };
 }
