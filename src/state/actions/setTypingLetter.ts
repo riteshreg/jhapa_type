@@ -85,7 +85,6 @@ export function setTypingLetter({ set, typedLetter }: Params) {
   set((state) => {
     const { letter, type } = typedLetter;
 
-    // getting the required variables from state
     let { wordIndex, charIndex, words } = state;
 
     let currentWord = words[wordIndex];
@@ -93,20 +92,16 @@ export function setTypingLetter({ set, typedLetter }: Params) {
     let currentLetter = currentWord.chars[charIndex];
     if (!currentLetter) return;
 
-    // adding typed letter into the typedKeywords array
     currentLetter.typedKeywords.push(letter);
 
-    // checking if the currentLetter is equal to the letter or not
     if (
       currentLetter.english.split("")[
         currentLetter.typedKeywords.length - 1
       ] !== letter
     ) {
-      // remove last item of typedKeywords to allow retry
       state.words[wordIndex].chars[charIndex].typedKeywords.pop();
       state.mistypeLetter.push(lettersMapping[letter]);
 
-      // handling mis_type_letter for space key
       let mis_type_letter = letter;
       if (type === "space") {
         mis_type_letter = "_";
@@ -119,28 +114,29 @@ export function setTypingLetter({ set, typedLetter }: Params) {
         type: "incorrect",
         typedKeywords: [letter],
         inViewPort: true,
+        position:0,
       });
 
-      state.words = ChangeWordsViewPort(state.words, state.canvasTextVal);
       state.charIndex += 1;
+      state.letterPosition += 1
       state.canvasTextVal.x += 1;
+      state.words = ChangeWordsViewPort(state.words, state.canvasTextVal);
 
       return;
     }
 
-    // from here the letter user entered will be correct
     if (
       currentLetter.numberOfKeyStroke === currentLetter.typedKeywords.length
     ) {
       currentLetter.type = "correct";
       state.charIndex += 1;
+      
+      state.letterPosition += 1
 
       state.canvasTextVal.x += 1;
-      state.canvasTextVal.y += 1;
 
       state.words = ChangeWordsViewPort(state.words, state.canvasTextVal);
 
-      // updating state if the word is complete
       if (currentWord.chars.length === state.charIndex) {
         state.wordIndex += 1;
         state.charIndex = 0;

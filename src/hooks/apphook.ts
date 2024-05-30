@@ -7,6 +7,7 @@ type ReturnType = {
   setRawEnglish: (params: string | null) => void;
   mistypeLetter: string[];
   canvasTextVal: CanvasTextVal;
+  letterPosition:number
 };
 
 export default function useAppHook(): ReturnType {
@@ -21,6 +22,7 @@ export default function useAppHook(): ReturnType {
     setTypingLetter,
     mistypeLetter,
     canvasTextVal,
+    letterPosition    
   } = useStateStore((state) => state);
 
   // useCallback to memoize the event handler
@@ -68,5 +70,6 @@ export default function useAppHook(): ReturnType {
     words,
     mistypeLetter,
     canvasTextVal,
-  };
+    letterPosition
+    };
 }

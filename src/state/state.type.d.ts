@@ -21,6 +21,7 @@ type Char = {
   type: CharType;
   typedKeywords: string[];
   inViewPort: boolean;
+  position:number;
 };
 
 type Word = {

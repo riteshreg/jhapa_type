@@ -19,6 +19,8 @@ export type State = {
   charIndex: number;
 
   canvasTextVal: CanvasTextVal;
+
+  letterPosition:number;
 };
 
 export type Actions = {
@@ -44,9 +46,11 @@ const initialState: State = {
 
   charIndex: 0,
 
+  letterPosition: 0,
+
   canvasTextVal: {
     x: 0,
-    y: 35,
+    y: 20,
   },
 };
 

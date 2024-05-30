@@ -44,6 +44,7 @@ function z(paragraph: string): Word[] {
           nepali: sequence.np,
           numberOfKeyStroke: sequence.en.length,
           type: "none",
+          position: 0,
           inViewPort: false,
         };
 
@@ -61,6 +62,8 @@ function z(paragraph: string): Word[] {
             numberOfKeyStroke: 1,
             type: "none",
             inViewPort: false,
+            position: 0,
+
           };
           letterResult.push(charResult);
         }
@@ -82,6 +85,7 @@ function z(paragraph: string): Word[] {
           type: "space",
           inViewPort: false,
           typedKeywords: [],
+          position: 0,
         },
       ],
     });
