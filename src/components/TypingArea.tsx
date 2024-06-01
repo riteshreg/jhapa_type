@@ -25,7 +25,6 @@ export default function TypingArea({ }: Props) {
     }))
     .filter((word) => word.chars.length);
 
-  console.log("current", currentWord);
 
   return (
     <div className="pt-14">

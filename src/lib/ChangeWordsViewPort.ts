@@ -33,7 +33,7 @@ export function ChangeWordsViewPort(
   words: Word[],
   canvasTextVal?: CanvasTextVal,
 ): Word[] {
-  const { x, y } = canvasTextVal || { x: 0, y: 20 };
+  const { x, y } = canvasTextVal || { x: 0, y: 26 };
 
   let numberOfLetterIndex = 0;
   const viewRangeStart = x;
